@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-2">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <button type="button" class="btn btn-outline-primary" (click)="selectComponent('emailviewer')">
+            Email File Viewer
+          </button>
+        </li>
+        <li class="list-group-item">
+            <button type="button" class="btn btn-outline-primary" (click)="selectComponent('pdfviewer')">
+                Pdf File Viewer
+              </button></li>
+        <li class="list-group-item">
+            <button type="button" class="btn btn-outline-primary" (click)="selectComponent('msfileviewer')">
+                Ms File Viewer
+              </button>
+        </li>
+      </ul>
+    </div>
+    <div class="col">
+        <div *ngIf="selectedComponent === 'emailviewer'">
+            <app-emailviewer></app-emailviewer>
+        </div>
+        <div *ngIf="selectedComponent === 'msfileviewer'">
+            <app-msfileviewer></app-msfileviewer>
+        </div>
+        <div *ngIf="selectedComponent === 'pdfviewer'">
+            <app-pdfviewer></app-pdfviewer>
+        </div>
+    </div>
+  </div>
+</div>
+
+
