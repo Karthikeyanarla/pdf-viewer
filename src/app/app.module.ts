@@ -11,8 +11,13 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
 import { MsfileviewerComponent } from './msfileviewer/msfileviewer.component';
+import { MsalModule } from '@azure/msal-angular';
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
 
+const isIE =
+  window.navigator.userAgent.indexOf("MSIE ") > -1 ||
+  window.navigator.userAgent.indexOf("Trident/") > -1;
 
 // import { EmlParser } from 'eml-format';
 @NgModule({
@@ -29,8 +34,24 @@ import { MsfileviewerComponent } from './msfileviewer/msfileviewer.component';
     PdfViewerModule,
     HttpClientModule,
     NgxDocViewerModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    MsalModule.forRoot(new PublicClientApplication({
+      auth: {
+        clientId: "6ffb06e1-440c-472b-8a35-9bbb6948b5fa", // Application (client) ID from the app registration
+        authority:
+          "https://login.microsoftonline.com/51d939e2-aefc-44e9-83a7-645e3ad16a3b", // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        redirectUri: "http://localhost:4200/", // This is your redirect URI
+      },
+      cache: {
+        cacheLocation: "localStorage",
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
+      },
+    }),
+    null,
+    null
+  ),
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
@@ -38,3 +59,4 @@ import { MsfileviewerComponent } from './msfileviewer/msfileviewer.component';
 export class AppModule { 
 
 }
+

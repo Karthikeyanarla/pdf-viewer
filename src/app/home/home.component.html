@@ -2,34 +2,32 @@
   <div class="row">
     <div class="col col-lg-2">
       <ul class="list-group">
-        <li class="list-group-item">
-          <button type="button" class="btn btn-outline-primary" (click)="selectComponent('emailviewer')">
-            Email File Viewer
-          </button>
-        </li>
-        <li class="list-group-item">
-            <button type="button" class="btn btn-outline-primary" (click)="selectComponent('pdfviewer')">
-                Pdf File Viewer
-              </button></li>
-        <li class="list-group-item">
-            <button type="button" class="btn btn-outline-primary" (click)="selectComponent('msfileviewer')">
-                Ms File Viewer
-              </button>
-        </li>
+        <div *ngFor="let file of fileList">
+          <li class="list-group-item">
+            <button class="btn btn-primary" (click)="selectComponent(file.filename)">
+              {{ file.filename.split(".")[0]}}
+            </button>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="col">
-        <div *ngIf="selectedComponent === 'emailviewer'">
-            <app-emailviewer></app-emailviewer>
+      <div *ngFor="let file of fileList">
+        <div *ngIf="file.filename === selectedComponent">
+          <div *ngIf="file.contentType == 'pdf'">
+            <app-pdfviewer [pdfSrc]="file.contentUrl">
+            </app-pdfviewer>
+          </div>
+          <div *ngIf="file.contentType == 'eml'">
+            <app-emailviewer [mailSrc] = "file.contentUrl" >
+            </app-emailviewer>
+          </div>
+          <div *ngIf="file.contentType == 'docx' || file.contentType == 'xls' || file.contentType == 'pptx'">
+            <app-msfileviewer [url] = 'file.contentUrl'>
+            </app-msfileviewer>
+          </div>
         </div>
-        <div *ngIf="selectedComponent === 'msfileviewer'">
-            <app-msfileviewer></app-msfileviewer>
-        </div>
-        <div *ngIf="selectedComponent === 'pdfviewer'">
-            <app-pdfviewer></app-pdfviewer>
-        </div>
+      </div>
     </div>
   </div>
 </div>
-
-

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-msfileviewer',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./msfileviewer.component.css']
 })
 export class MsfileviewerComponent {
-  url = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+
+  @Input()
+  url : string;
 }
