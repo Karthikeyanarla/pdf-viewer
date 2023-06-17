@@ -1,30 +1,42 @@
-<div class="container">
-  <div class="row">
-    <div class="col col-lg-2">
-      <ul class="list-group">
+<div *ngIf="!loginDisplay">
+  <p>Please sign-in to see your profile information.</p>
+</div>
+
+<div *ngIf="loginDisplay">
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-2">
+        <ul class="list-group">
+          <div *ngFor="let file of fileList">
+            <li class="list-group-item">
+              <button
+                class="btn btn-primary"
+                (click)="selectComponent(file.filename)"
+              >
+                {{ file.filename.split(".")[0] }}
+              </button>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div class="col">
         <div *ngFor="let file of fileList">
-          <li class="list-group-item">
-            <button class="btn btn-primary" (click)="selectComponent(file.filename)">
-              {{ file.filename.split(".")[0]}}
-            </button>
-          </li>
-        </div>
-      </ul>
-    </div>
-    <div class="col">
-      <div *ngFor="let file of fileList">
-        <div *ngIf="file.filename === selectedComponent">
-          <div *ngIf="file.contentType == 'pdf'">
-            <app-pdfviewer [pdfSrc]="file.contentUrl">
-            </app-pdfviewer>
-          </div>
-          <div *ngIf="file.contentType == 'eml'">
-            <app-emailviewer [mailSrc] = "file.contentUrl" >
-            </app-emailviewer>
-          </div>
-          <div *ngIf="file.contentType == 'docx' || file.contentType == 'xls' || file.contentType == 'pptx'">
-            <app-msfileviewer [url] = 'file.contentUrl'>
-            </app-msfileviewer>
+          <div *ngIf="file.filename === selectedComponent">
+            <div *ngIf="file.contentType == 'pdf'">
+              <app-pdfviewer [pdfSrc]="file.contentUrl"> </app-pdfviewer>
+            </div>
+            <div *ngIf="file.contentType == 'eml'">
+              <app-emailviewer [mailSrc]="file.contentUrl"> </app-emailviewer>
+            </div>
+            <div
+              *ngIf="
+                file.contentType == 'docx' ||
+                file.contentType == 'xls' ||
+                file.contentType == 'pptx'
+              "
+            >
+              <app-msfileviewer [url]="file.contentUrl"> </app-msfileviewer>
+            </div>
           </div>
         </div>
       </div>

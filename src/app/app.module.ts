@@ -1,18 +1,32 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { EmailviewerComponent } from './emailviewer/emailviewer.component';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
-import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
 import { MsfileviewerComponent } from './msfileviewer/msfileviewer.component';
-import { MsalModule } from '@azure/msal-angular';
+import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
+import { ProfileComponent } from './profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { AppRoutingModule } from './app.route.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 
 
 const isIE =
@@ -28,13 +42,25 @@ const isIE =
     HomeComponent,
     PdfviewerComponent,
     MsfileviewerComponent,
+    ProfileComponent,
+    SidenavComponent
   ],
   imports: [
+    MatListModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatDividerModule,
+    MatCardModule,
+    MatButtonModule,
+    AppRoutingModule,
+    MatToolbarModule,
     BrowserModule,
     PdfViewerModule,
     HttpClientModule,
     NgxDocViewerModule,
-    RouterModule.forRoot([]),
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
         clientId: "6ffb06e1-440c-472b-8a35-9bbb6948b5fa", // Application (client) ID from the app registration
@@ -47,13 +73,30 @@ const isIE =
         storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
       },
     }),
-    null,
-    null
+    {
+      interactionType: InteractionType.Redirect,
+      authRequest: {
+        scopes: ["user.read"],
+      },
+    },
+    {
+      interactionType: InteractionType.Redirect,
+      protectedResourceMap : new Map(
+        [['https://graph.microsoft.com/v1.0/me', ['user.read']]
+      ]),
+    }
   ),
+    BrowserAnimationsModule,
   ],
 
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass : MsalInterceptor,
+    multi : true,
+  },
+  MsalGuard
+  ],
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 
 export class AppModule { 

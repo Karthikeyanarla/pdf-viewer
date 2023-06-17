@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { InteractionStatus } from '@azure/msal-browser';
-
 import {
   MSAL_GUARD_CONFIG,
   MsalBroadcastService,
@@ -10,13 +9,10 @@ import {
   MsalService,
 } from '@azure/msal-angular';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+@Injectable({
+  providedIn: 'root',
 })
-export class AppComponent implements OnInit {
-
+export class LoginService {
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private msalBroadcastService: MsalBroadcastService,
@@ -32,13 +28,15 @@ export class AppComponent implements OnInit {
     this.isIframe = window !== window.parent && !window.opener;
 
     this.msalBroadcastService.inProgress$
-    .pipe(
-      filter((status: InteractionStatus) => status === InteractionStatus.None),
-      takeUntil(this._destroying$)
-    )
-    .subscribe(() => {
-      this.setLoginDisplay();
-    })
+      .pipe(
+        filter(
+          (status: InteractionStatus) => status === InteractionStatus.None
+        ),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.setLoginDisplay();
+      });
   }
 
   setLoginDisplay() {
@@ -49,12 +47,12 @@ export class AppComponent implements OnInit {
     this.authService.loginRedirect();
   }
 
-  logout() { // Add log out function here
+  logout() {
+    // Add log out function here
     this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'http://localhost:4200'
+      postLogoutRedirectUri: 'http://localhost:4200',
     });
   }
-
 
   ngOnDestroy(): void {
     this._destroying$.next(undefined);

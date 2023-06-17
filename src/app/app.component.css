@@ -1,3 +1,9 @@
-.sidebar{
-    margin-top: 50px;
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+a.title {
+  color: white;
+  text-decoration: none;
+  
 }
