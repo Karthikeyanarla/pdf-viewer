@@ -1,0 +1,49 @@
+<!-- <div class="email-container">
+  <div class="header">
+    <div class="sender">{{senderName}}</div>
+    <div class="subject">{{emailSubject}}</div>
+    <div class="date">June 19, 2023, 10:30 AM</div>
+  </div>
+  <div class="body">
+    {{ body }}
+  </div>
+  <div class="attachments">
+    <p><strong>Attachments:</strong></p>
+    <ul>
+      <li><a href="#">attachment1.pdf</a></li>
+      <li><a href="#">attachment2.jpg</a></li>
+    </ul>
+  </div>
+</div> -->
+
+
+<div class="email-container">
+    <div class="header">
+      <div class="sender"> senderName: {{senderName}}</div>
+        <div class="subject">{{emailSubject}}</div>
+      <div class="recipients">
+        <div class="to">{{recipientEmail}}</div>
+        <div class="cc">CC: cc1@example.com, cc2@example.com</div>
+        <div class="bcc">BCC: bcc1@example.com, bcc2@example.com</div>
+      </div>
+
+      <div class="date">June 19, 2023, 10:30 AM</div>
+    </div>
+    <div class="body" [innerHTML]='body'></div>
+    <div class="attachments">
+    <div *ngIf="attachments && attachments.length">
+        <h3>attachments</h3>
+        <ul class="attachments-list">
+          <li *ngFor="let file of attachments">
+            <a (click)="download(file)">{{ file.fileName }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <hr>
+      <p>This is the email signature.</p>
+    </div>
+  </div>
+  

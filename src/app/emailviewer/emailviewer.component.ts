@@ -14,7 +14,6 @@ import { Mail } from 'src/models/mail.model';
 export class EmailviewerComponent {
   parsed: any;
 
-
   @Input()
   public mailSrc: string;
 
@@ -33,7 +32,6 @@ export class EmailviewerComponent {
     downloadLink.onclick = (event: any) => {
       document.body.removeChild(event.target);
     };
-
     document.body.appendChild(downloadLink);
     downloadLink.click();
   }
@@ -53,14 +51,13 @@ export class EmailviewerComponent {
     // }
     const parser = new postalMime();
     const email = await this.http
-      .get<Blob>(
-        this.mailSrc,
-        {
-          observe: 'response',
-          responseType: 'blob' as 'json',
-        }
-      )
+      .get<Blob>(this.mailSrc, {
+        observe: 'response',
+        responseType: 'blob' as 'json',
+      })
       .toPromise();
+      debugger;
     this.parsed = await parser.parse(email.body);
+    console.log(this.parsed);
   }
 }

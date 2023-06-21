@@ -20,7 +20,7 @@ export class HomeComponent {
     constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) {
 
     const file1 = {
-      contentUrl : 'https://datastorageaxa.blob.core.windows.net/emailattachments/emailtest/Star WC-125 & 130 App.pdf',
+      contentUrl : 'assets/book.pdf',
       contentType :'pdf',
       filename : 'Star WC-125 & 130 App.pdf',
     };
@@ -56,7 +56,13 @@ export class HomeComponent {
       filename : 'dtesrech.docx',
     }
 
-    this.fileList = [file1, file2, file3, file4, file5, file6];
+    const file7 = {
+      contentUrl : 'https://datastorageaxa.blob.core.windows.net/emailattachments/emailtest/Test.msg',
+      contentType :'msg',
+      filename : 'test.msg',
+    }
+
+    this.fileList = [file1, file2, file3, file4, file5, file6, file7];
 
   }
 
