@@ -9,7 +9,7 @@ import { AttachDocument } from 'src/models/document.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   selectedComponent: string | null = null;

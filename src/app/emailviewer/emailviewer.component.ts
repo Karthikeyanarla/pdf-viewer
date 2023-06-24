@@ -9,7 +9,7 @@ import { Mail } from 'src/models/mail.model';
 @Component({
   selector: 'app-emailviewer',
   templateUrl: './emailviewer.component.html',
-  styleUrls: ['./emailviewer.component.css'],
+  styleUrls: ['./emailviewer.component.scss'],
 })
 export class EmailviewerComponent {
   parsed: any;

@@ -1,63 +1,81 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <a href="/" class="title">CEM</a>
-    
-    <span class="toolbar-item-spacer"></span>
-    <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">
-        Login
-    </button>
+  <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a href="/" class="title">CEM</a>
 
-    <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu" *ngIf="loginDisplay">
-        <mat-icon>account_circle</mat-icon>
-    </button>
+  <span class="toolbar-item-spacer"></span>
+  <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">
+    Login
+  </button>
 
-    <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-        <button mat-menu-item [routerLink]="['profile']">
-            <mat-icon>person</mat-icon><span>My Account</span>
-        </button>
-        <button mat-menu-item [routerLink]="['settings']">
-            <mat-icon>settings</mat-icon><span>Settings</span>
-        </button>
-        <button mat-menu-item routerLink="#">
-            <mat-icon>help</mat-icon><span>Help</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>Logout
-        </button>
-    </mat-menu>
+  <span class="user-name">
+    {{ userProfile?.givenName + " " + userProfile?.surname }}</span
+  >
+  <button
+    mat-icon-button
+    matTooltip="My Account"
+    [matMenuTriggerFor]="userAccountMenu"
+    *ngIf="loginDisplay"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <button mat-menu-item [routerLink]="['profile']">
+      <mat-icon>person</mat-icon><span>My Account</span>
+    </button>
+    <button mat-menu-item [routerLink]="['settings']">
+      <mat-icon>settings</mat-icon><span>Settings</span>
+    </button>
+    <button mat-menu-item routerLink="#">
+      <mat-icon>help</mat-icon><span>Help</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
+  </mat-menu>
 </mat-toolbar>
 
-
 <mat-sidenav-container class="app-container">
-    <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
-        <img class="img-responsive" src="assets/aureus_logo.webp" height="100" width="200" alt="This is the logo">
-        <mat-nav-list>
-            <mat-list-item routerLink="profile">
-                <mat-icon>dashboard</mat-icon><span>Dashboard</span>
-            </mat-list-item>
-            <mat-expansion-panel [class.mat-elevation-z0]="true">
-                <mat-expansion-panel-header>
-                    Policies
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="#">
-                        <mat-icon>apple</mat-icon><span>iOS</span>
-                    </a>
-                    <a mat-list-item routerLink="#">
-                        <mat-icon>android</mat-icon><span>Android</span>
-                    </a>
-                </mat-nav-list>
-            </mat-expansion-panel>
-            <mat-expansion-panel [class.mat-elevation-z0]="true">
-
-            </mat-expansion-panel>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet>
-        </router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container> 
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [class.mat-elevation-z4]="true"
+    class="app-sidenav"
+  >
+    <img
+      class="img-responsive"
+      src="assets/aureus_logo.webp"
+      height="100"
+      width="200"
+      alt="This is the logo"
+    />
+    <mat-nav-list>
+      <mat-list-item routerLink="profile">
+        <div class="mat-nav-list">
+          <mat-icon>dashboard</mat-icon><span>Dashboard</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="claims">
+        <div class="mat-nav-list">
+          <mat-icon>assignment</mat-icon><span>Claims</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="policies">
+        <div class="mat-nav-list">
+          <mat-icon>people</mat-icon><span>Policies</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="submissions">
+        <div class="mat-nav-list">
+          <mat-icon>Submissions</mat-icon><span>Submissions</span>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

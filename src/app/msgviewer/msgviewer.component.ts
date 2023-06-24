@@ -5,7 +5,7 @@ import MsgReader from '@kenjiuno/msgreader';
 @Component({
   selector: 'app-msgviewer',
   templateUrl: './msgviewer.component.html',
-  styleUrls: ['./msgviewer.component.css']
+  styleUrls: ['./msgviewer.component.scss']
 })
 export class MsgviewerComponent {
 
