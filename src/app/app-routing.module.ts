@@ -7,7 +7,7 @@ import { ListscreenComponent } from './listscreen/listscreen.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ClaimsComponent } from './claims/claims.component';
-import { PoliciesComponent } from './policies/policies.component';
+// import { PoliciesComponent } from './policies/policies.component';
 import { SubmissionsComponent } from './submissions/submissions.component';
 import { HomeComponent } from './home/home.component';
 
@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: "", component : ListscreenComponent, canActivate: [MsalGuard] },
   {path : "settings", component : SettingsComponent, canActivate: [MsalGuard]},
   {path : "claims", component : ClaimsComponent, canActivate: [MsalGuard]},
+  {path : "claims/home", component : HomeComponent, canActivate: [MsalGuard]},
   {path : "policies", component : HomeComponent, canActivate: [MsalGuard]},
   {path : "submissions", component : SubmissionsComponent, canActivate: [MsalGuard]},
   {path : "claims/claim:claim", component : HomeComponent, canActivate: [MsalGuard]},
