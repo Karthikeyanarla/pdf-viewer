@@ -3,7 +3,6 @@
 
   <div *ngIf="parsed.attachments && parsed.attachments.length">
     <h3>attachments</h3>
-
     <ul class="attachments-list">
       <li *ngFor="let file of parsed.attachments">
         <a (click)="download(file)">{{ file.filename }}</a>

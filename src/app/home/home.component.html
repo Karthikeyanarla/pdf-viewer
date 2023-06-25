@@ -28,6 +28,9 @@
             <div *ngIf="file.contentType == 'eml'">
               <app-emailviewer [mailSrc]="file.contentUrl"> </app-emailviewer>
             </div>
+            <div *ngIf="file.contentType == 'msg'">
+              <app-msgviewer [url]="file.contentUrl"> </app-msgviewer>
+            </div>
             <div
               *ngIf="
                 file.contentType == 'docx' ||
