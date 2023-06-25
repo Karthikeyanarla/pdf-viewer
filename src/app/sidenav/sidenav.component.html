@@ -22,10 +22,10 @@
   </button>
 
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-    <button mat-menu-item [routerLink]="['profile']">
+    <button mat-menu-item [routerLink]="['/profile']">
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
-    <button mat-menu-item [routerLink]="['settings']">
+    <button mat-menu-item [routerLink]="['/settings']">
       <mat-icon>settings</mat-icon><span>Settings</span>
     </button>
     <button mat-menu-item routerLink="#">
@@ -53,22 +53,22 @@
       alt="This is the logo"
     />
     <mat-nav-list>
-      <mat-list-item routerLink="profile">
+      <mat-list-item routerLink="/profile">
         <div class="mat-nav-list">
           <mat-icon>dashboard</mat-icon><span>Dashboard</span>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="claims">
+      <mat-list-item routerLink="/claims">
         <div class="mat-nav-list">
           <mat-icon>assignment</mat-icon><span>Claims</span>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="policies">
+      <mat-list-item routerLink="/policies">
         <div class="mat-nav-list">
           <mat-icon>people</mat-icon><span>Policies</span>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="submissions">
+      <mat-list-item routerLink="/submissions">
         <div class="mat-nav-list">
           <mat-icon>people</mat-icon><span>Submissions</span>
         </div>
